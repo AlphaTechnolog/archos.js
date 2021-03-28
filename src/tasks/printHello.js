@@ -6,11 +6,11 @@ const Task = require('../../archos/Illuminate/Tasks/Task');
 class PrintHello extends Task {
   constructor() {
     const archosLibraries = [
-      'log'
+      'log',
     ];
 
     const externalLibraries = [
-      //
+      'http'
     ];
 
     super(archosLibraries, externalLibraries);
