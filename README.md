@@ -237,7 +237,9 @@ The cli provide commands to generate automatically tedious code, with the cli
 now, you must create routes, create tasks, etc. To execute the cli, see this:
 
 ```sh
-cd archospath
+cd archospath/archos/Cli
+yarn # or npm install
+cd ../../
 node cli --help # or if you are in linux: ./cli --help
 ```
 
