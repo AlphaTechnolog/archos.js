@@ -51,6 +51,28 @@ class Paths {
   get projectPath() {
     return path.join(this.srcPath, '..');
   }
+
+  /**
+   * Get the tasks path
+   * 
+   * @return {string}
+   */
+  get tasksPath() {
+    return this.src('tasks');
+  }
+
+  /**
+   * Get the tasks register path
+   * 
+   * @return {string}
+   */
+  get registerTasksFile() {
+    return path.join(
+      this.tasksPath,
+      'register',
+      'index.js'
+    );
+  }
 }
 
 module.exports = new Paths()

@@ -47,20 +47,44 @@ class References {
   }
 
   /**
+   * Create a new file with a content
+   * 
+   * @param {string} filename
+   * @param {string} content
+   * @return {Promise<void>}
+   */
+  newFile(filename, content) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filename, content, err => {
+        err && log.error('Error at write the file');
+        resolve();
+      });
+    });
+  }
+
+  /**
    * Append a content in a reference
    * 
    * @param {string} file
    * @param {string} toAppend
    * @return {Promise<void>}
    */
-  append(file, toAppend) {
+  append(file, toAppend, endline=true) {
     return new Promise((resolve, reject) => {
       fs.readFile(file, (err, content) => {
         if (err) {
           log.error('Error at read the make file: ' + err);
         }
 
-        const newContent = content + '\n\n' + toAppend;
+        let eln;
+
+        if (endline === true) {
+          eln = '\n\n';
+        } else {
+          eln = '\n';
+        }
+
+        const newContent = content + eln + toAppend;
 
         fs.writeFile(file, newContent, err => {
           if (err) {

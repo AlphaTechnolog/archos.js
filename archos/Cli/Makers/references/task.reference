@@ -1,18 +1,17 @@
 const Task = require('../../archos/Illuminate/Tasks/Task');
 
 /**
- * The archos libraries array.
- * 
+ * The archos libraries array
+ *
  * @var {Array<string>}
  */
 const archosLibraries = [
-  'log',
-  'consts'
+  //
 ];
 
 /**
- * External libraries array.
- * 
+ * External libraries array
+ *
  * @var {Array<string>}
  */
 const external = [
@@ -20,9 +19,14 @@ const external = [
 ];
 
 /**
- * Print hello class
+ * ~name~ task class
  */
-class PrintHello extends Task {
+class ~name~ extends Task {
+  /**
+   * Constructor
+   *
+   * @return {this}
+   */
   constructor() {
     super(
       archosLibraries,
@@ -30,10 +34,14 @@ class PrintHello extends Task {
     )
   }
 
+  /**
+   * The main ~name~ class method
+   *
+   * @return {void}
+   */
   run() {
-    this.libs.log.info('Hello world from task file');
-    this.libs.log.info('Port: ' + this.libs.consts.get('port'));
+    //
   }
 }
 
-module.exports = PrintHello
+module.exports = ~name~
