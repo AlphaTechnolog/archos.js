@@ -1,5 +1,6 @@
 const objects = require('../../lib/objects');
 const makers = require('../../Cli/Makers/index.js');
+const options = require('../../Cli/Options/index.js');
 const log = require('../../lib/log')
 
 /**
@@ -23,39 +24,6 @@ class BootedCli {
   _optionsArgc = 0;
 
   /**
-   * The options rules arguments
-   * 
-   * @private
-   * @var {Object<string, Object<string, string|boolean>}
-   */
-  _optionsRules = {
-    make: {
-      alias: 'mk',
-      describe: 'What do you make?',
-      type: 'string',
-      demandOption: true      
-    },
-
-    name: {
-      describe: 'The name of make',
-      type: 'string',
-      demandOption: true,
-    },
-
-    type: {
-      describe: 'The type of make',
-      type: 'string',
-      demandOption: false,
-    },
-
-    method: {
-      describe: 'The method of make',
-      type: 'string',
-      demandOption: false
-    }
-  }
-
-  /**
    * Constructor
    * 
    * @param {any} yargs
@@ -74,7 +42,7 @@ class BootedCli {
   _parceArguments__rules(yargs) {
     const rules = yargs;
 
-    Object.entries(this._optionsRules).forEach(([ name, options ]) => {
+    Object.entries(options).forEach(([ name, options ]) => {
       rules.option(
         name,
         options
