@@ -231,8 +231,105 @@ output:
 Api Route!
 ```
 
+## The cli
+
+The cli provide commands to generate automatically tedious code, with the cli
+now, you must create routes, create tasks, etc. To execute the cli, see this:
+
+```sh
+cd archospath
+node cli --help # or if you are in linux: ./cli --help
+```
+
+### Making a task
+
+To make a task see this:
+
+```sh
+node cli --make task --name 'TaskName'
+```
+
+Now the files `src/tasks/register/index.js` was register a new task named: "TaskName"
+and the file `src/tasks/TaskName.js` was created with the following struct:
+
+```javascript
+const Task = require('../../archos/Illuminate/Tasks/Task');
+
+/**
+ * The archos libraries array
+ *
+ * @var {Array<string>}
+ */
+const archosLibraries = [
+  //
+];
+
+/**
+ * External libraries array
+ *
+ * @var {Array<string>}
+ */
+const external = [
+  //
+];
+
+/**
+ * TaskName task class
+ */
+class TaskName extends Task {
+  /**
+   * Constructor
+   *
+   * @return {this}
+   */
+  constructor() {
+    super(
+      archosLibraries,
+      external,
+    )
+  }
+
+  /**
+   * The main TaskName class method
+   *
+   * @return {void}
+   */
+  run() {
+    //
+  }
+}
+
+module.exports = TaskName
+```
+
+### Making a route
+
+To make a route use the following commands:
+
+```sh
+node cli --make route --type view --name 'foo/bar/' --method get # or to create an api route
+node cli --make route --type api --name 'foo/bar/api/' --method get
+```
+
+Now the file `src/routes/views.js` and file `src/routes/api.js` was updated. The
+file `src/routes/views.js`, was appended this:
+
+```javascript
+ViewRouter.get('foo/bar/', (req) => {
+  //
+});
+```
+
+And the `api.js` was appended this:
+
+```javascript
+ApiRouter.get('foo/bar/api/', (req) => {
+  //
+});
+```
+
 ## Enjoy
 
-Thanks for use archos.js this "framework" is in development, but it,
+Thanks for use archos.js, this "framework" is in development, but it,
 not exists post router method, put, delete only get, doesn't exists
 the controller etc. Enjoy!
