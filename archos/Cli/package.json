@@ -1,0 +1,13 @@
+{
+  "name": "archos_cli",
+  "description": "The archos cli",
+  "version": "1.0.0",
+  "main": "Bin/index.js",
+  "license": "MIT",
+  "bin": {
+    "index.js": "./bin/index.js"
+  },
+  "dependencies": {
+    "yargs": "13.2"
+  }
+}

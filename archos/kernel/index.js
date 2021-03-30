@@ -1,5 +1,6 @@
 const BootedTasks = require('./booted/BootedTasks');
 const BootedKernel = require('./booted/BootedKernel');
+const BootedCli = require('./booted/BootedCli');
 
 /**
  * The Archos.js kernel class
@@ -21,6 +22,16 @@ class Kernel {
    */
   bootTasks() {
     return new BootedTasks();
+  }
+
+  /**
+   * Boot the cli system
+   * 
+   * @param {any} yargs
+   * @return {BootedCli}
+   */
+  bootCli(yargs) {
+    return new BootedCli(yargs);
   }
 }
 

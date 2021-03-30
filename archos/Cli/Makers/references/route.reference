@@ -1,0 +1,3 @@
+~router~.~method~('~name~', (req) => {
+  //
+});

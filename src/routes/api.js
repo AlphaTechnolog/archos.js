@@ -12,3 +12,7 @@ const { ApiRouter } = router;
 ApiRouter.get('', (req) => {
   return 'api route';
 });
+
+ApiRouter.get('foo/bar', (req) => {
+  return 'foo/bar'
+});

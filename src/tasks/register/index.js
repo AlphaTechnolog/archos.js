@@ -7,4 +7,4 @@ const TasksManager = require('../../../archos/Illuminate/Tasks/TasksManager');
  * @example TasksManager.register(require('../TAKSNAME'))
  */
 
-// TasksManager.register(require('../printHello'))
+TasksManager.register(require('../printHello'))
