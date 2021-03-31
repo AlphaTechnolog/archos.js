@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+const { argv } = process
+const kernel = require('./archos/kernel');
+const setup = kernel.bootSetup(argv.slice(2));
+
+(async () => {
+  await setup.run();
+})();

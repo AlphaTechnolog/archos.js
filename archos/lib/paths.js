@@ -62,6 +62,24 @@ class Paths {
   }
 
   /**
+   * Get the archos path
+   * 
+   * @return {string}
+   */
+  get archosPath() {
+    return path.join(this.projectPath, 'archos');
+  }
+
+  /**
+   * Get the cli archos path
+   * 
+   * @return {string}
+   */
+  get cliPath() {
+    return path.join(this.archosPath, 'Cli');
+  }
+
+  /**
    * Get the tasks register path
    * 
    * @return {string}
