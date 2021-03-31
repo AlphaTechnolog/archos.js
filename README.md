@@ -28,6 +28,16 @@ cd myapp
 yarn # or npm install
 ```
 
+### Installing microframeworks dependencies
+
+To install the microframeworks dependencies you must use the `setupProject`
+script located at `ARCHOSPROJECT/setupProject`, to use it, see the next commands:
+
+```sh
+yarn # to install the main dependencies
+node setupProject yarn|npm
+```
+
 ### Running scripts
 
 #### Start
