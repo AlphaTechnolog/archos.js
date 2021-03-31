@@ -184,7 +184,7 @@ const { ViewRouter } = require('../../archos/Illuminate/Router')
  * @example If your route is /hello/world the route path is: '/hello/world'
  */
 
-ViewRouter.get('', (req) => {
+ViewRouter.get('/', (req) => {
   const randomNumber = Math.floor(Math.random() * (10 + 1));
   const { url } = req;
   return `RandomNumber: ${randomNumber}\nUrl: ${url}`
@@ -218,7 +218,7 @@ const { ApiRouter } = router;
  * @example If your path is /hello/world the path is /api/hello/world
  */
 
-ApiRouter.get('', (req) => {
+ApiRouter.get('/', (req) => {
   return req.url + '\nApi route!';
 });
 ```
