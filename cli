@@ -1,4 +1,2 @@
 #!/usr/bin/env node
-
-const path = require('path');
-require(path.join(__dirname, 'archos', 'Cli', 'Bin', 'index.js'));
+require('./archos/Cli/Bin/index.js');

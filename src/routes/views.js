@@ -9,6 +9,6 @@ const { ViewRouter } = router;
  * @example If your route is /hello/world the route path is: '/hello/world'
  */
 
-ViewRouter.get('', (req) => {
+ViewRouter.get('/', (req) => {
   return '<h1>View route</h1>';
 });

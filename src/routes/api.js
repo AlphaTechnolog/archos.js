@@ -9,6 +9,10 @@ const { ApiRouter } = router;
  * @example If your path is /hello/world the path is /api/hello/world
  */
 
-ApiRouter.get('', (req) => {
+ApiRouter.get('/', (req) => {
   return 'api route';
+});
+
+ApiRouter.post('/my/post/route', (req) => {
+  return 'hello world';
 });

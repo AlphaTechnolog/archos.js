@@ -44,6 +44,16 @@ class Log {
   info(msg) {
     console.log(`[I]: ${msg}`.blue.bold);
   }
+
+  /**
+   * Show a warning message (magenta)
+   * 
+   * @param {string} msg
+   * @return {void}
+   */
+  warning(msg) {
+    console.log(`[W]: ${msg}`.magenta.bold);
+  }
 }
 
 module.exports = new Log()
