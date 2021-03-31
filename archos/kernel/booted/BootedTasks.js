@@ -1,4 +1,4 @@
-const TasksManager = require('../../Illuminate/Tasks/TasksManager');
+const TasksManager = require('../../Saved/Tasks/TasksManager');
 
 /**
  * The booted tasks system class.

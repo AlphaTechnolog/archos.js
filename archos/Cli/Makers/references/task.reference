@@ -1,4 +1,4 @@
-const Task = require('../../archos/Illuminate/Tasks/Task');
+const Task = require('../../archos/Saved/Tasks/Task');
 
 /**
  * The archos libraries array

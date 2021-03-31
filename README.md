@@ -67,7 +67,7 @@ nvim printHello.js
 ```
 
 ```javascript
-const Task = require('../../archos/Illuminate/Tasks/Task');
+const Task = require('../../archos/Saved/Tasks/Task');
 
 /**
  * The archos libs array.
@@ -130,7 +130,7 @@ class PrintHello extends Task {
 The it file you watch the next code:
 
 ```javascript
-const TasksManager = require('../../../archos/Illuminate/Tasks/TasksManager');
+const TasksManager = require('../../../archos/Saved/Tasks/TasksManager');
 
 /**
  * In this file you will register the tasks to execute
@@ -174,7 +174,7 @@ route is 'hello/world' the route is: '/hello/world'.
 Code example:
 
 ```javascript
-const { ViewRouter } = require('../../archos/Illuminate/Router')
+const { ViewRouter } = require('../../archos/Saved/Router')
 
 /**
  * Register your views in this file.
@@ -207,7 +207,7 @@ your route is 'hello/world/' your route is '/api/hello/world/'.
 Code example:
 
 ```javascript
-const router = require('../../archos/Illuminate/Router');
+const router = require('../../archos/Saved/Router');
 const { ApiRouter } = router;
 
 /**
@@ -255,7 +255,7 @@ Now the files `src/tasks/register/index.js` was register a new task named: "Task
 and the file `src/tasks/TaskName.js` was created with the following struct:
 
 ```javascript
-const Task = require('../../archos/Illuminate/Tasks/Task');
+const Task = require('../../archos/Saved/Tasks/Task');
 
 /**
  * The archos libraries array

@@ -6,14 +6,14 @@ class TasksManager {
    * Registered tasks
    * 
    * @private
-   * @var {Array<Archos/Illuminate/Tasks/Task>}
+   * @var {Array<Archos/Saved/Tasks/Task>}
    */
   _registered = [];
 
   /**
    * Register a task
    * 
-   * @param {Archos/Illuminate/Tasks/Task} task
+   * @param {Archos/Saved/Tasks/Task} task
    * @return {void}
    */
   register(task) {
