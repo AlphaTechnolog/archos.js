@@ -164,8 +164,7 @@ class BootedKernel {
 
       if (newViewRouteRegister[url]) {
         if (newViewRouteRegister[url].method !== req.method.toLowerCase()) {
-          log.warning('The requested page doesn\'t exists')
-          return res.end('<h1>Page not found 404</h1>')
+          return webErrors.webError404.dispatch404Error(res);
         }
       }
 

@@ -1,4 +1,5 @@
 const log = require('../log');
+const MWebError404 = require('../../../src/errors/404')
 
 /**
  * The web error 404 utility class
@@ -26,7 +27,7 @@ class WebError404 {
    */
   dispatch404Error(res) {
     log.warning("The requested page doesn't exists");
-    res.end('<h1>Page not found</h1>');
+    res.end(new MWebError404().run(res));
   }
 }
 
