@@ -15,7 +15,7 @@ class Log {
   }
 
   /**
-   * Show a error message (red)
+   * Show a error message (red) and exit.
    * 
    * @param {string} msg
    * @return {void}
@@ -23,6 +23,16 @@ class Log {
   error(msg) {
     console.log(`[E]: ${msg}`.red.bold);
     process.exit(1);
+  }
+
+  /**
+   * Show a error message (red) without exit.
+   * 
+   * @param {string} msg
+   * @return {void}
+   */
+  unSeveralError(msg) {
+    console.log(`[E]: ${msg}`.red.bold);
   }
 
   /**

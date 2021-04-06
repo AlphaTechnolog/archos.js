@@ -41,11 +41,13 @@ class BootedSetup {
    */
   _validate__argv() {
     if (this._argv.length === 0) {
-      log.error('Invalid argv please pass the manager: yarn|npm');
+      console.log('Invalid argv please pass the manager: yarn|npm');
+      process.exit(1)
     }
 
     if (this._validate__argv__invalidManager()) {
-      log.error('Invalid manager, please select yarn or npm');
+      console.log('Invalid manager, please select yarn or npm');
+      process.exit(1)
     }
 
     this._manager = this._argv[0]; // npm|yarn

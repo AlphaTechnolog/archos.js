@@ -54,7 +54,7 @@ class Consts {
    * @param {any} defVal Default value
    * @return {any}
    */
-  get(key, defVal) {
+  get(key, defVal=this._consts[key]) {
     return this._consts[key] || defVal;
   }
 }

@@ -159,18 +159,18 @@ class BootedKernel {
         newApiRouteRegister,
         url
       )) {
-        return webErrors.webError404.dispatch404Error(res);
+        return webErrors.webError404.dispatch404Error(res, req);
       }
 
       if (newViewRouteRegister[url]) {
         if (newViewRouteRegister[url].method !== req.method.toLowerCase()) {
-          return webErrors.webError404.dispatch404Error(res);
+          return webErrors.webError404.dispatch404Error(res, req);
         }
       }
 
       if (newApiRouteRegister[url]) {
         if (newApiRouteRegister[url].method !== req.method.toLowerCase()) {
-          return webErrors.webError404.dispatch404Error(res);
+          return webErrors.webError404.dispatch404Error(res, req);
         }
       }
 

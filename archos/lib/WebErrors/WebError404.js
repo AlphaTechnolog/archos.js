@@ -1,4 +1,5 @@
 const log = require('../log');
+const webRoutes = require('../webRoutes');
 const MWebError404 = require('../../../src/errors/404')
 
 /**
@@ -23,10 +24,18 @@ class WebError404 {
    * Dispatch the error 404 message
    * 
    * @param {http.server.res} res
+   * @param {http.server.req} req
    * @return {void}
    */
-  dispatch404Error(res) {
-    log.warning("The requested page doesn't exists");
+  dispatch404Error(res, req) {
+    log.unSeveralError("The requested page doesn't exists");
+    log.warning('Request info')
+    log.warning('------------')
+
+    webRoutes.displayRequestInfo(req, ['url', 'method'], {
+      logMethod: 'warning'
+    });
+
     res.end(new MWebError404().run(res));
   }
 }
