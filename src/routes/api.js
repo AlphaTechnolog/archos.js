@@ -1,6 +1,6 @@
 const router = require('../../archos/Saved/Router');
 const { ApiRouter } = router;
-const consts = require('../../archos/lib/consts');
+const controller = require('../../archos/lib/controller');
 
 /**
  * Register your api routes in this file, the routes
@@ -10,11 +10,6 @@ const consts = require('../../archos/lib/consts');
  * @example If your path is /hello/world/ the path is /api/hello/world/
  */
 
-ApiRouter.get('/', (req) => {
-  return 'api route';
-});
-
-ApiRouter.post('/my/api/post/route/', (req) => {
-  const randomNumber = Math.floor(Math.random() * (10 + 1));
-  return `RandomNumber: ${randomNumber}`;
+ApiRouter.get('/', () => {
+  return controller.call('Api');
 });

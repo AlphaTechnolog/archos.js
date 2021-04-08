@@ -1,5 +1,6 @@
 const router = require('../../archos/Saved/Router');
 const { ViewRouter } = router;
+const controller = require('../../archos/lib/controller');
 
 /**
  * Register your views in this file.
@@ -9,6 +10,6 @@ const { ViewRouter } = router;
  * @example If your route is /hello/world/ the route path is: '/hello/world/'
  */
 
-ViewRouter.get('/', (req) => {
-  return '<h1>View route</h1>';
+ViewRouter.get('/', () => {
+  return controller.call('Home');
 });

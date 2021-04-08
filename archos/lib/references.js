@@ -69,7 +69,7 @@ class References {
    * @param {string} toAppend
    * @return {Promise<void>}
    */
-  append(file, toAppend, endline=true) {
+  append(file, toAppend, endline=false) {
     return new Promise((resolve, reject) => {
       fs.readFile(file, (err, content) => {
         if (err) {

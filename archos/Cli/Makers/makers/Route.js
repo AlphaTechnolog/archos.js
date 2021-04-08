@@ -60,11 +60,21 @@ class Route extends Maker {
     if (!await paths.exists(routesDir)) {
       log.error('No such file or directory: ' + routesDir);
     }
+    
+    let name = this._argv.name.split('/');
+    name = name[name.length - 1];
+    name = name.split('_');
+    name = [...name.map((item) => {
+      return item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+    })];
+    name = name.join('');
+    name = name + 'Controller';
 
     const reference = await references.processReference(
       this.$reference,
       {
         ...this._argv,
+        controller: name,
         router: this._argv.type.toLowerCase() === 'api' ? 'ApiRouter' : 'ViewRouter'
       }
     );

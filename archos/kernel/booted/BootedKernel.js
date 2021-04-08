@@ -124,7 +124,10 @@ class BootedKernel {
           `[${name}]: Requested address: ${prefix + route}, method: ${req.method.toUpperCase()}`
         );
 
-        return res.end(meta.cb(req));
+        const TheController = meta.cb();
+        const controller = new TheController(req)
+        controller.boot(controller.req);
+        return res.end(controller._response.end);
       }
     });
   }

@@ -42,6 +42,17 @@ class Paths {
   get srcPath() {
     return path.join(__dirname, '..', '..', 'src');
   }
+  
+  /**
+   * Get the developer controllers folder path
+   *
+   * @return {string}
+   */
+  get controllersPath() {
+    return this.src(
+      'controllers'
+    );
+  }
 
   /**
    * Get the project path
