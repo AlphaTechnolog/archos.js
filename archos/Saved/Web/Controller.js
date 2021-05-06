@@ -1,3 +1,5 @@
+const stringsHelpers = require("../../lib/dataTypes__string");
+
 /**
  * The controller class utility
  */
@@ -32,14 +34,14 @@ class Controller {
       req
     );
   }
-  
+
   /**
-   * The server response with a raw text
+   * Validate the rawRes serverResponse
    *
-   * @param {string} serverResponse
+   * @param  {string} serverResponse
    * @return {void}
    */
-  rawRes(serverResponse) {
+  _validate__rawRes__serverResponse(serverResponse) {
     // Required serverResponse if it doesn't passed
     // the app crashes inmediatelly
     const validators = [
@@ -57,19 +59,49 @@ class Controller {
         serverResponse
       }, type: ${typeof(serverResponse)}`;
     }
-    
-    const processer = r => {
-      if (typeof(r) !== 'string') {
-        r = JSON.stringify(r);
-      }
-      
-      return r;
-    }
+  }
+
+  /**
+   * The server response with a raw text
+   *
+   * @param {any} serverResponse
+   * @return {void}
+   */
+  rawRes(serverResponse) {
+    this._validate__rawRes__serverResponse(serverResponse);
     
     this._response = {
-      type: 'raw',
-      end: processer(serverResponse),
+      headers: {},
+      end: stringsHelpers.fromOther(serverResponse),
     };
+  }
+
+  /**
+   * Return's a customizable response.
+   *
+   * @param  {any} response
+   * @param  {Object<string, any>} headers
+   * @return {void}
+   */
+  customRes(res, headers) {
+    this._validate__rawRes__serverResponse(res);
+
+    this._response = {
+      headers,
+      end: stringsHelpers.fromOther(res),
+    }
+  }
+
+  /**
+   * Return's a json response.
+   *
+   * @param  {any} response
+   * @return {void}
+   */
+  jsonRes(response) {
+    this.customRes(response, {
+      "Content-Type": "application/json",
+    });
   }
   
   /**

@@ -79,9 +79,9 @@ class References {
         let eln;
 
         if (endline === true) {
-          eln = '\n\n';
-        } else {
           eln = '\n';
+        } else {
+          eln = '';
         }
 
         const newContent = content + eln + toAppend;

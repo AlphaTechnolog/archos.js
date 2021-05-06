@@ -127,6 +127,11 @@ class BootedKernel {
         const TheController = meta.cb();
         const controller = new TheController(req)
         controller.boot(controller.req);
+
+        for (const [name, value] of Object.entries(controller._response.headers)) {
+          res.setHeader(name, value);
+        }
+
         return res.end(controller._response.end);
       }
     });

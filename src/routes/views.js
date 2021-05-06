@@ -10,6 +10,4 @@ const controller = require('../../archos/lib/controller');
  * @example If your route is /hello/world/ the route path is: '/hello/world/'
  */
 
-ViewRouter.get('/', () => {
-  return controller.call('Home');
-});
+ViewRouter.get('/', () => controller.call("Home"));

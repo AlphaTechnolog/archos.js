@@ -19,11 +19,11 @@ const external = [
 ];
 
 /**
- * The api controller
+ * The ~name~ controller class.
  */
-class Api extends Controller {
+class ~name~ extends Controller {
   /**
-   * Constructor
+   * Load the libraries for ~name~ controller.
    *
    * @param {http.server.req} req
    * @return {this}
@@ -37,17 +37,14 @@ class Api extends Controller {
   }
   
   /**
-   * Boot the controller
+   * Boot the ~name~ controller.
    *
    * @param {http.server.req} req
    * @return {void}
    */
   boot(req) {
-    this.jsonRes([
-      { name: "Joe" },
-      { name: "Gabriel" },
-    ]);
+    //
   }
 }
 
-module.exports = Api
+module.exports = ~name~

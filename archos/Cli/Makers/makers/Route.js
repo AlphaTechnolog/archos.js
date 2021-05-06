@@ -86,7 +86,8 @@ class Route extends Maker {
 
     await references.append(
       routerFile,
-      reference
+      reference,
+      false
     );
 
     log.success('Route maked successfully!');
