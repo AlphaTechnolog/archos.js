@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+require("./archos/ProjectCreator/Bin/project-creator.js");
