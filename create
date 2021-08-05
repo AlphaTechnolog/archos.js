@@ -29,49 +29,6 @@ class Sh {
 const sh = new Sh()
 
 /**
- * Make a question using readline.
- * @param {string} message
- * @returns {Promise<string>}
- */
-const question = (message) => {
-  const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  })
-
-  return new Promise((resolve, reject) => {
-    readline.question(message, (response) => {
-      readline.close()
-      resolve(response)
-    })
-  })
-}
-
-/**
- * Define a cli confirm.
- * @param {string} message
- * @param {boolean} defaultValue (default true)
- * @returns {Promise<boolean>}
- */
-const confirm = async (message, defaultValue = true) => {
-  const yn = !!defaultValue ? 'Y/n' : 'y/n'
-  let response = await question(`${message} ${yn}: `)
-  while (
-    response.toLowerCase() !== 'y' &&
-    response.toLowerCase() !== 'n' &&
-    response !== ''
-  ) {
-    response = await question(`Invalid response. ${message} ${yn}: `)
-  }
-
-  return (
-    response.toLowerCase() === 'y' ? true :
-    response.toLowerCase() === 'n' ? false :
-    defaultValue
-  )
-}
-
-/**
  * Define a customLogger because dependencies problems
  */
 class CustomLog {
@@ -106,17 +63,21 @@ const error = (message) => {
   process.exit(1)
 }
 
-
 /**
  * Main method
  * @returns {Promise<void>}
  */
 const main = async () => {
-  if (process.argv.length !== 3) {
-    error('Invalid project name')
+  if (process.argv.length !== 4) {
+    error('Invalid project name projectManager (yarn | npm)')
   }
 
   const projectName = process.argv[2];
+  const dependencyManager = process.argv[3];
+
+  if (dependencyManager !== 'yarn' && dependencyManager !== 'npm') {
+    error('Invalid dependency manager')
+  }
 
   log.process('Cloning repository...')
 
@@ -125,23 +86,7 @@ const main = async () => {
   log.success('OK')
   log.process('Installing dependencies...')
 
-  let dependencyManager = await question(
-    'What dependency manager do you like to use yarn or npm? '
-  )
-
-  while (dependencyManager !== 'yarn' && dependencyManager !== 'npm') {
-    dependencyManager = await question(
-      'Choose a valid dependency manager yarn or npm: '
-    )
-  }
-
-  const implementGit = await confirm('Do you want to implement git on your project')
-
-  if (implementGit) {
-    await sh.run(`cd ./${projectName} && ${dependencyManager} install && node ./setupProject ${dependencyManager} && rm -rf .git && git init`)
-  } else {
-    await sh.run(`cd ./${projectName} && ${dependencyManager} install && node ./setupProject ${dependencyManager} && rm -rf .git`)
-  }
+  await sh.run(`cd ./${projectName} && ${dependencyManager} install && node ./setupProject ${dependencyManager} && rm -rf .git && git init`)
 
   log.success('Project created successfully, to start read this guide: https://github.com/AlphaTechnolog/archos.js')
 };
