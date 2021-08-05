@@ -69,7 +69,7 @@ const error = (message) => {
  */
 const main = async () => {
   if (process.argv.length !== 4) {
-    error(`usage: ${__filename} name projectManager (yarn | npm)`)
+    error(`usage: ${__filename} name projectManager (yarn | npm)`);
   }
 
   const projectName = process.argv[2];
