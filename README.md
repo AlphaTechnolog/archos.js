@@ -15,28 +15,12 @@ The dependencies for the project are:
 
 To create an app with archos.js use the following commands:
 
-### Cloning
-
 ```sh
-git clone https://github.com/AlphaTechnolog/archos.js.git myapp
-cd myapp
+curl -sL https://raw.githubusercontent.com/AlphaTechnolog/archos.js/master/create | node - my-awesome-archos-project yarn # select between yarn or npm
 ```
 
-### Installing dependencies
-
-```sh
-yarn # or npm install
-```
-
-### Installing microframeworks dependencies
-
-To install the microframeworks dependencies you must use the `setupProject`
-script located at `ARCHOSPROJECT/setupProject`, to use it, see the next commands:
-
-```sh
-yarn # to install the main dependencies
-node setupProject yarn|npm
-```
+Now you have a folder named `my-awesome-archos-project` in your actual
+cwd, continue reading!
 
 ### Running scripts
 

@@ -1,5 +1,4 @@
 const { exec } = require('child_process');
-const log = require('./log');
 
 /**
  * The sh class utility
@@ -16,11 +15,8 @@ class Sh {
     return new Promise((resolve, reject) => {
       exec(cmd, (err, stdout, stderr) => {
         if (err) {
-          log.error(errorMsg + ': ' + err);
-        }
-
-        if (stderr) {
-          log.error(errorMsg + ': ' + stderr);
+          console.error(errorMsg + ': ' + err);
+          process.exit(1)
         }
 
         resolve(stdout);

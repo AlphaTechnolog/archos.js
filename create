@@ -1,0 +1,94 @@
+#!/usr/bin/env node
+const { exec } = require('child_process');
+
+/**
+ * The sh class utility
+ */
+class Sh {
+  /**
+   * Run a sh command
+   * 
+   * @param {string} cmd
+   * @param {string} errorMsg
+   * @return {Promise<string>}
+   */
+  run(cmd, errorMsg='Error at execute a command') {
+    return new Promise((resolve, reject) => {
+      exec(cmd, (err, stdout, stderr) => {
+        if (err) {
+          console.error(errorMsg + ': ' + err);
+          process.exit(1)
+        }
+
+        resolve(stdout);
+      });
+    });
+  }
+}
+
+const sh = new Sh()
+
+/**
+ * Define a customLogger because dependencies problems
+ */
+class CustomLog {
+  /**
+   * Show a success message.
+   * @param {string} message
+   * @returns {void}
+   */
+  success (message) {
+    console.log(`[S]: ${message}`)
+  }
+
+  /**
+   * Show a process message.
+   * @param {string} message
+   * @returns {void}
+   */
+  process (message) {
+    console.log(`[P]: ${message}`)
+  }
+}
+
+const log = new CustomLog()
+
+/**
+ * Show an error in stderr and exit with status code 1
+ * @param {string} message
+ * @returns {void}
+ */
+const error = (message) => {
+  console.error(message)
+  process.exit(1)
+}
+
+/**
+ * Main method
+ * @returns {Promise<void>}
+ */
+const main = async () => {
+  if (process.argv.length !== 4) {
+    error(`usage: ${__filename} name projectManager (yarn | npm)`);
+  }
+
+  const projectName = process.argv[2];
+  const dependencyManager = process.argv[3];
+
+  if (dependencyManager !== 'yarn' && dependencyManager !== 'npm') {
+    error('Invalid dependency manager')
+  }
+
+  log.process('Cloning repository...')
+
+  await sh.run(`git clone https://github.com/AlphaTechnolog/archos.js.git ${projectName}`)
+
+  log.success('OK')
+  log.process('Installing dependencies...')
+
+  await sh.run(`cd ./${projectName} && ${dependencyManager} install && node ./setupProject ${dependencyManager} && rm -rf .git && git init`)
+
+  log.success('Project created successfully, to start read this guide: https://github.com/AlphaTechnolog/archos.js')
+};
+
+main();

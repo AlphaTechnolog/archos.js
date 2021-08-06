@@ -160,7 +160,7 @@ class Controller {
       this.externalLibs.length === 0
     ) {
       // Termining the session for performance
-      // reason, why realize the process over up a
+      // reason, why realize the process over up an
       // empty array?.
       return;
     }
