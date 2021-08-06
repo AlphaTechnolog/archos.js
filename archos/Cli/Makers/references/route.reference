@@ -1,1 +1,1 @@
-~router~.~method~('~name~', () => controller.call("~controller~"));
+~router~.~method~('~name~', (req) => controller.call(req, "~controller~", "~methodName~"));

@@ -35,14 +35,14 @@ class ~name~ extends Controller {
       req
     );
   }
-  
+
   /**
-   * Boot the ~name~ controller.
+   * The ~method~ method for the ~name~.
    *
    * @param {http.server.req} req
-   * @return {void}
+   * @returns {void}
    */
-  boot(req) {
+  ~method~(req) {
     //
   }
 }

@@ -3,7 +3,7 @@ module.exports = {
     alias: 'mk',
     describe: 'What do you make?',
     type: 'string',
-    demandOption: true      
+    demandOption: true
   },
 
   name: {

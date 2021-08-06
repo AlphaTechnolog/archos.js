@@ -9,9 +9,10 @@ class Controller {
    * Get a controller class and return it class.
    *
    * @param {string} name
+   * @param {string} methodName
    * @return {Archos/Saved/Web/Controller}
    */
-  call(name) {
+  call(req, name, methodName = "main") {
     if (!name) {
       throw 'Invalid controller call';
     }
@@ -21,7 +22,11 @@ class Controller {
       name + '.js'
     );
 
-    return require(controllerPath);
+    const Controller = require(controllerPath);
+    const controller = new Controller(req);
+    controller[methodName](controller.req);
+
+    return controller;
   }
 }
 

@@ -16,7 +16,7 @@ const { ApiRouter } = Router;
 class BootedKernel {
   /**
    * The server instance
-   * 
+   *
    * @private
    * @var {http.server}
    */
@@ -24,7 +24,7 @@ class BootedKernel {
 
   /**
    * Booted kernel constructor
-   * 
+   *
    * @return {this}
    */
   constructor() {
@@ -33,7 +33,7 @@ class BootedKernel {
 
   /**
    * Main class method
-   * 
+   *
    * @return {void}
    */
   make() {
@@ -43,7 +43,7 @@ class BootedKernel {
 
   /**
    * Load the server views routes
-   * 
+   *
    * @return {void}
    */
   _serverLoader__route__views() {
@@ -52,7 +52,7 @@ class BootedKernel {
 
   /**
    * Load the server api routes
-   * 
+   *
    * @return {void}
    */
   _serverLoader__route__api() {
@@ -61,7 +61,7 @@ class BootedKernel {
 
   /**
    * Load the server routes
-   * 
+   *
    * @return {void}
    */
   _loadServerRoutes() {
@@ -71,7 +71,7 @@ class BootedKernel {
 
   /**
    * Register the views routes
-   * 
+   *
    * @param {http.server.req} req
    * @param {http.server.res} res
    * @return {void}
@@ -88,7 +88,7 @@ class BootedKernel {
 
   /**
    * Register the api routes
-   * 
+   *
    * @param {http.server.req} req
    * @param {http.server.res} res
    * @return {void}
@@ -105,7 +105,7 @@ class BootedKernel {
 
   /**
    * Register the routes
-   * 
+   *
    * @param {Object<string, string>} register
    * @param {http.server.req} req
    * @param {http.server.res} res
@@ -124,9 +124,7 @@ class BootedKernel {
           `[${name}]: Requested address: ${prefix + route}, method: ${req.method.toUpperCase()}`
         );
 
-        const TheController = meta.cb();
-        const controller = new TheController(req)
-        controller.boot(controller.req);
+        const controller = meta.cb(req);
 
         for (const [name, value] of Object.entries(controller._response.headers)) {
           res.setHeader(name, value);
@@ -139,7 +137,7 @@ class BootedKernel {
 
   /**
    * Validate the server views routes
-   * 
+   *
    * @param {http.server.req} req
    * @param {http.server.res} res
    * @return {void}
@@ -151,7 +149,7 @@ class BootedKernel {
 
   /**
    * Create the server
-   * 
+   *
    * @return {void}
    */
   _createServer() {
@@ -188,7 +186,7 @@ class BootedKernel {
 
   /**
    * Start a server
-   * 
+   *
    * @return {void}
    */
   start() {

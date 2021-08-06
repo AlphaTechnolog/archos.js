@@ -23,7 +23,9 @@ class Controller extends Maker {
    * @return {void}
    */
   validate() {
-    //
+    if (!this._argv.method) {
+      log.warning('Using the method main by default');
+    }
   }
 
   /**
@@ -43,7 +45,7 @@ class Controller extends Maker {
 
     const controllerReference = await references.processReference(
       this.$reference,
-      { name: this._argv.name }
+      { name: this._argv.name, method: this._argv.method || 'main' }
     );
 
     log.process("Creating controller...");
