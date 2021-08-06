@@ -16,7 +16,7 @@ The dependencies for the project are:
 To create an app with archos.js use the following commands:
 
 ```sh
-curl -sL https://raw.githubusercontent.com/AlphaTechnolog/archos.js/main/create | node - my-awesome-archos-project yarn # select between yarn or npm
+curl -sL https://raw.githubusercontent.com/AlphaTechnolog/archos.js/master/create | node - my-awesome-archos-project yarn # select between yarn or npm
 ```
 
 Now you have a folder named `my-awesome-archos-project` in your actual
