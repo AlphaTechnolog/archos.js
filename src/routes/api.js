@@ -11,3 +11,4 @@ const controller = require('../../archos/lib/controller');
  */
 
 ApiRouter.get('/', () => controller.call("Api"));
+ApiRouter.get('/hello', () => controller.call("HelloController"));

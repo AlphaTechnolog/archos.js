@@ -1,4 +1,5 @@
 const stringsHelpers = require("../../lib/dataTypes__string");
+const LibsImporter = require('../../lib/libsImporter');
 
 /**
  * The controller class utility
@@ -124,31 +125,6 @@ class Controller {
   }
   
   /**
-   * Construct the archos libs
-   *
-   * @private
-   * @return {void}
-   */
-  _constructLibs__archos() {
-    this.archosLibs.forEach(toImport => {
-      const basePath = '../../lib';
-      this.libs[toImport] = require(`${basePath}/${toImport}.js`)
-    });
-  }
-  
-  /**
-   * Construct the external libs
-   *
-   * @private
-   * @return {void}
-   */
-  _constructLibs__external() {
-    this.externalLibs.forEach((toImport) => {
-      this.libs[toImport] = require(toImport);
-    });
-  }
-  
-  /**
    * Construct and validate the libs
    *
    * @private
@@ -159,14 +135,25 @@ class Controller {
       this.archosLibs.length === 0 &&
       this.externalLibs.length === 0
     ) {
-      // Termining the session for performance
-      // reason, why realize the process over up an
-      // empty array?.
       return;
     }
-    
-    this._constructLibs__archos();
-    this._constructLibs__external();
+
+    const archosLibrariesImporter = new LibsImporter(this.archosLibs.map(
+      lib => ({
+        ...lib,
+        import: './' + lib.import
+      })
+    ));
+
+    const librariesImporter = new LibsImporter(this.externalLibs);
+
+    for (const [libraryName, library] of Object.entries(archosLibrariesImporter.librariesObject)) {
+      this.libs[libraryName] = library;
+    }
+
+    for (const [libraryName, library] of Object.entries(librariesImporter.librariesObject)) {
+      this.libs[libraryName] = library;
+    }
   }
 }
 

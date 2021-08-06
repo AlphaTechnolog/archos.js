@@ -1,3 +1,5 @@
+const LibsImporter = require('../../lib/libsImporter');
+
 /**
  * The task utility
  */
@@ -21,39 +23,30 @@ class Task {
   }
 
   /**
-   * Load the archos libraries
-   * 
-   * @private
-   * @return {void}
-   */
-  _load__archosLibraries() {
-    this.archosLibraries.forEach((name) => {
-      this.libs[name] = require('../../lib/' + name);
-    });
-  }
-
-  /**
-   * Load the external libraries
-   * 
-   * @private
-   * @return {void}
-   */
-  _load__externalLibraries() {
-    this.external.forEach((name) => {
-      this.libs[name] = require(name);
-    });
-  }
-
-  /**
    * Main method
    * 
    * @return {void}
    */
   make(archosLibraries, external) {
-    this.archosLibraries = archosLibraries;
-    this.external = external;
-    this._load__archosLibraries();
-    this._load__externalLibraries();
+    this.archosLibs = archosLibraries;
+    this.externalLibs = external;
+
+    const archosLibrariesImporter = new LibsImporter(this.archosLibs.map(
+      lib => ({
+        ...lib,
+        import: './' + lib.import
+      })
+    ));
+
+    const librariesImporter = new LibsImporter(this.externalLibs);
+
+    for (const [libraryName, library] of Object.entries(archosLibrariesImporter.librariesObject)) {
+      this.libs[libraryName] = library;
+    }
+
+    for (const [libraryName, library] of Object.entries(librariesImporter.librariesObject)) {
+      this.libs[libraryName] = library;
+    }
   }
 }
 
