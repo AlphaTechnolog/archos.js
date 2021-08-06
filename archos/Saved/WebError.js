@@ -4,12 +4,15 @@
 class WebError {
   /**
    * Run the error
-   * 
+   *
    * @param {http.server.req} req
    * @return {string}
    */
   run(req) {
-    return this.$controller(req);
+    const Controller = this.$controller(req);
+    const controller = new Controller(req);
+    controller.boot(req);
+    return controller._response;
   }
 }
 

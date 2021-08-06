@@ -15,7 +15,7 @@ class Controller {
     if (!name) {
       throw 'Invalid controller call';
     }
-    
+
     const controllerPath = path.join(
       paths.controllersPath,
       name + '.js'

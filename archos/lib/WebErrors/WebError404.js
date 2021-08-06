@@ -8,7 +8,7 @@ const MWebError404 = require('../../../src/errors/404')
 class WebError404 {
   /**
    * Validate if exists the route in verification object
-   * 
+   *
    * @param {Object<string, string|Function<http.server.req>} viewVerificationObject
    * @param {Object<string, string|Function<http.server.req>} apiVerificationObject
    * @param {string} url
@@ -22,7 +22,7 @@ class WebError404 {
 
   /**
    * Dispatch the error 404 message
-   * 
+   *
    * @param {http.server.res} res
    * @param {http.server.req} req
    * @return {void}
@@ -36,7 +36,7 @@ class WebError404 {
       logMethod: 'warning'
     });
 
-    res.end(new MWebError404().run(res));
+    res.end(new MWebError404().run(res).end);
   }
 }
 

@@ -78,6 +78,17 @@ class Controller {
   }
 
   /**
+   * Return an html response
+   *
+   * @param {string} res The html to render
+   */
+  htmlRes(res) {
+    this.customRes(res, {
+      'Content-Type': 'text/html',
+    });
+  }
+
+  /**
    * Return's a customizable response.
    *
    * @param  {any} response
