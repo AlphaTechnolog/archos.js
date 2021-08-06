@@ -1,25 +1,27 @@
 class LibsImporter {
   /**
    * Construct the helper.
-   * 
+   *
    * @param {Array<string>} libraries
    */
-  constructor(libraries) {
-    this.make(libraries);
+  constructor(libraries, librariesPrefix) {
+    this.libraries = libraries;
+    this.librariesPrefix = librariesPrefix;
   }
 
   /**
    * Make the helper.
-   * 
+   *
+   * @static
    * @param {Array<string>} libraries
    */
-  make(libraries) {
-    this.libraries = libraries;
+  static make(libraries, librariesPrefix = "") {
+    return new this(libraries, librariesPrefix);
   }
 
   /**
    * Get the imported libraries object.
-   * 
+   *
    * @get
    * @returns {Object<string, any>}
    */
@@ -27,9 +29,9 @@ class LibsImporter {
     let librariesObject = {};
     for (const library of this.libraries) {
       if (typeof(library) === 'string') {
-        librariesObject[library] = require(library);
+        librariesObject[library] = require(this.librariesPrefix + library);
       } else {
-        librariesObject[library.as] = require(library.import);
+        librariesObject[library.as] = require(this.librariesPrefix + library.import);
       }
     }
 

@@ -6,14 +6,14 @@ const LibsImporter = require('../../lib/libsImporter');
 class Task {
   /**
    * The libs object
-   * 
+   *
    * @var {Object<string, any>}
    */
   libs = {}
 
   /**
    * Constructor
-   * 
+   *
    * @param {Array<string>} archosLibraries
    * @param {Array<string>} externalLibraries
    * @return {this}
@@ -24,29 +24,24 @@ class Task {
 
   /**
    * Main method
-   * 
+   *
    * @return {void}
    */
   make(archosLibraries, external) {
     this.archosLibs = archosLibraries;
     this.externalLibs = external;
 
-    const archosLibrariesImporter = new LibsImporter(this.archosLibs.map(
-      lib => ({
-        ...lib,
-        import: './' + lib.import
-      })
-    ));
+    const archosLibrariesImporter = LibsImporter.make(
+      this.archosLibs,
+      './'
+    );
 
-    const librariesImporter = new LibsImporter(this.externalLibs);
+    const librariesImporter = LibsImporter.make(this.externalLibs);
 
-    for (const [libraryName, library] of Object.entries(archosLibrariesImporter.librariesObject)) {
-      this.libs[libraryName] = library;
-    }
-
-    for (const [libraryName, library] of Object.entries(librariesImporter.librariesObject)) {
-      this.libs[libraryName] = library;
-    }
+    this.libs = {
+      ...archosLibrariesImporter.librariesObject,
+      ...librariesImporter.librariesObject,
+    };
   }
 }
 

@@ -12,14 +12,14 @@ class Controller {
    * @var {Object<string, any>}
    */
   _response = {}
-  
+
   /**
    * The libs array
    *
    * @var {Array<any>}
    */
   libs = [];
-  
+
   /**
    * Constructor
    *
@@ -70,7 +70,7 @@ class Controller {
    */
   rawRes(serverResponse) {
     this._validate__rawRes__serverResponse(serverResponse);
-    
+
     this._response = {
       headers: {},
       end: stringsHelpers.fromOther(serverResponse),
@@ -104,7 +104,7 @@ class Controller {
       "Content-Type": "application/json",
     });
   }
-  
+
   /**
    * Save the data in this instance
    *
@@ -117,13 +117,9 @@ class Controller {
     this.archosLibs = archosLibs;
     this.externalLibs = externalLibs;
     this.req = req;
-
-    // Executing the `_constructLibs` method to
-    // get and validate all libraries and save it to
-    // this instance.
     this._constructLibs();
   }
-  
+
   /**
    * Construct and validate the libs
    *
@@ -131,29 +127,13 @@ class Controller {
    * @return {void}
    */
   _constructLibs() {
-    if (
-      this.archosLibs.length === 0 &&
-      this.externalLibs.length === 0
-    ) {
-      return;
-    }
+    const archosLibrariesImporter = LibsImporter.make(this.archosLibs, './');
+    const librariesImporter = LibsImporter.make(this.externalLibs);
 
-    const archosLibrariesImporter = new LibsImporter(this.archosLibs.map(
-      lib => ({
-        ...lib,
-        import: './' + lib.import
-      })
-    ));
-
-    const librariesImporter = new LibsImporter(this.externalLibs);
-
-    for (const [libraryName, library] of Object.entries(archosLibrariesImporter.librariesObject)) {
-      this.libs[libraryName] = library;
-    }
-
-    for (const [libraryName, library] of Object.entries(librariesImporter.librariesObject)) {
-      this.libs[libraryName] = library;
-    }
+    this.libs = {
+      ...archosLibrariesImporter.librariesObject,
+      ...librariesImporter.librariesObject,
+    };
   }
 }
 
