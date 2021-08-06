@@ -1,1 +1,1 @@
-TasksManager.register(require('../~name~.js'))
+TasksManager.register(require('../~name~.js'));

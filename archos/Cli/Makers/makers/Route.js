@@ -11,7 +11,7 @@ const fs = require('fs');
 class Route extends Maker {
   /**
    * Reference file path
-   * 
+   *
    * @var {string}
    */
   get $reference() {
@@ -20,7 +20,7 @@ class Route extends Maker {
 
   /**
    * Validate the argv
-   * 
+   *
    * @return {void}
    */
   validate() {
@@ -51,7 +51,7 @@ class Route extends Maker {
 
   /**
    * The main route function
-   * 
+   *
    * @return {void}
    */
   async run() {
@@ -60,7 +60,7 @@ class Route extends Maker {
     if (!await paths.exists(routesDir)) {
       log.error('No such file or directory: ' + routesDir);
     }
-    
+
     let name = this._argv.name.split('/');
     name = name[name.length - 1];
     name = name.split('_');
@@ -87,7 +87,7 @@ class Route extends Maker {
     await references.append(
       routerFile,
       reference,
-      false
+      true
     );
 
     log.success('Route maked successfully!');

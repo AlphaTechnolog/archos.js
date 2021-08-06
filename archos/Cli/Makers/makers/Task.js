@@ -68,7 +68,7 @@ class Task extends Maker {
     await reference.append(
       registerTaskFile,
       tasksRegisterReference,
-      false
+      true
     );
 
     log.success('Registered the task successfully!');
