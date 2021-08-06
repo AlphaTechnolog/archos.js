@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "dotenv": "^8.2.0",
-    "node-fetch": "^2.6.1"
+    "dotenv": "^8.2.0"
   }
 }
