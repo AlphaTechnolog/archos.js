@@ -15,5 +15,8 @@
 const kernel = require('../archos/kernel');
 const entry = kernel.boot();
 const tasks = kernel.bootTasks();
-tasks.start();
-entry.start();
+
+(async () => {
+  await tasks.start();
+  entry.start();
+})();

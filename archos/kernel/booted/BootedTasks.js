@@ -16,15 +16,15 @@ class BootedTasks {
   /**
    * Start the tasks processes
    * 
-   * @return {void}
+   * @return {Promise<void>}
    */
-  start() {
+  async start() {
     this._load__developerTasks();
 
-    TasksManager._registered.forEach((Task) => {
+    for await (const Task of TasksManager._registered) {
       const task = new Task();
-      task.run();
-    });
+      await task.run();
+    }
   }
 }
 
