@@ -39,11 +39,11 @@ class Home extends Controller {
   /**
    * The main method for the Home controller.
    *
-   * @param {http.server.req} req
+   * @param {http.server.req} _req
    * @return {void}
    */
-  main(req) {
-    this.rawRes('<h1>Hello, World!</h1>');
+  main(_req) {
+    this.renderView('home.html');
   }
 }
 

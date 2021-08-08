@@ -15,7 +15,7 @@ const archosLibraries = [
  * @var {Array<string>}
  */
 const external = [
-  //
+  'path'
 ];
 
 /**
@@ -39,13 +39,11 @@ class Error404 extends Controller {
   /**
    * The main method for the Error404 controller.
    *
-   * @param {http.server.req} req
+   * @param {http.server.req} _req
    * @return {void}
    */
   main(_req) {
-    this.customRes('<h1>HTTP 404 | The requested page does not exists</h1>', {
-      'Content-Type': 'text/html',
-    });
+    this.renderView(this.libs.path.join('errors', '404.html'));
   }
 }
 

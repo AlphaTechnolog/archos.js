@@ -102,6 +102,15 @@ class Paths {
       'index.js'
     );
   }
+
+  /**
+   * Get the views path.
+   * 
+   * @return {string}
+   */
+  get viewsDirectory() {
+    return path.join(this.srcPath, 'views');
+  }
 }
 
 module.exports = new Paths()

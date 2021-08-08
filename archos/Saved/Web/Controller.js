@@ -1,5 +1,10 @@
+const fs = require('fs');
+const mime = require('mime-types');
+const path = require('path');
 const stringsHelpers = require("../../lib/dataTypes__string");
 const LibsImporter = require('../../lib/libsImporter');
+const paths = require('../../lib/paths')
+const log = require('../../lib/log');
 
 /**
  * The controller class utility
@@ -78,9 +83,41 @@ class Controller {
   }
 
   /**
+   * Render a file into the response
+   * 
+   * @param {string} filepath
+   * @return {void}
+   */
+  render(filepath) {
+    if (!fs.existsSync(filepath)) {
+      log.error('Invalid file path, no such file or directory');
+    }
+
+    const content = fs.readFileSync(filepath).toString();
+
+    this.customRes(content, {
+      'Content-Type': mime.contentType(path.extname(filepath))
+    });
+  }
+
+  /**
+   * Render a view from the src/views directory.
+   * 
+   * @param {string} viewName
+   * @return {void}
+   */
+  renderView(viewName) {
+    this.render(path.join(
+      paths.viewsDirectory,
+      viewName
+    ));
+  }
+
+  /**
    * Return an html response
    *
    * @param {string} res The html to render
+   * @return {void}
    */
   htmlRes(res) {
     this.customRes(res, {
