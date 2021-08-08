@@ -40,14 +40,6 @@ Start a web server using the dev reloading (nodemon)
 yarn dev # or npm run dev
 ```
 
-## files
-
-The files to create your app are:
-
-- src/tasks/**
-- src/tasks/register/**
-- src/routes/**
-
 ### src/tasks/**
 
 In the these folder you must create various scripts, it scripts will be created
@@ -56,8 +48,8 @@ code:
 
 ```sh
 cd myapp/src/tasks
-touch printHello.js
-nvim printHello.js
+touch PrintHello.js
+code PrintHello.js
 ```
 
 ```javascript
@@ -138,7 +130,7 @@ You want to register the tasks, to register the before
 created task named `printHello.js` use:
 
 ```javascript
-TasksManager.register(require('../printHello'));
+TasksManager.register(require('../PrintHello'));
 ```
 
 All tasks was executed in the register order
@@ -146,8 +138,8 @@ if you register two tasks: `printHello`, `printPort`
 and you register as this:
 
 ```javascript
-TasksManager.register(require('../printHello'));
-TasksManager.register(require('../printPort'));
+TasksManager.register(require('../PrintHello'));
+TasksManager.register(require('../PrintPort'));
 ```
 
 The `yarn start` command output is:
@@ -175,11 +167,11 @@ const controller = require("../../archos/lib/controller");
  * Register your views in this file.
  * The addresses doesn't contain a prefix, it is raw path
  *
- * @example If your route is '' the route path is: '/'
- * @example If your route is /hello/world the route path is: '/hello/world'
+ * @example If your route is '/' the route path is: '/'
+ * @example If your route is '/hello/world/' the route path is: '/hello/world/'
  */
 
-ViewRouter.get('/', () => controller.call("HomeController"));
+ViewRouter.get('/', (req) => controller.call(req, "HomeController"));
 ```
 
 Now create a controller:
@@ -225,13 +217,13 @@ class Home extends Controller {
   }
   
   /**
-   * Boot the controller
+   * The main method for the Home controller.
    *
    * @param {http.server.req} req
    * @return {void}
    */
-  boot(req) {
-    this.rawRes('<h1>Hello, World!</h1>');
+  main(req) {
+    this.htmlRes('<h1>Hello, World!</h1>');
   }
 }
 
@@ -259,11 +251,11 @@ const controller = require("../../archos/lib/controller");
  * Register your api routes in this file, the routes
  * will be prefixed by the /api path prefix.
  *
- * @example If your path is '' the path is /api/
- * @example If your path is /hello/world the path is /api/hello/world
+ * @example If your path is '/' the path is /api/
+ * @example If your path is '/hello/world/' the path is /api/hello/world/
  */
 
-ApiRouter.get('/', () => controller.call("ApiController"));
+ApiRouter.get('/', (req) => controller.call(req, "ApiController"));
 ```
 
 Now create a controller:
@@ -309,12 +301,12 @@ class Api extends Controller {
   }
   
   /**
-   * Boot the controller
+   * The main controller for the main API controller
    *
    * @param {http.server.req} req
    * @return {void}
    */
-  boot(req) {
+  main(req) {
     this.jsonRes({
       message: "Hello, World!"
     });
@@ -403,21 +395,21 @@ module.exports = TaskName
 To make a route use the following commands:
 
 ```sh
-node cli --make route --type view --name 'foo/bar/' --method get # or to create an api route
-node cli --make route --type api --name 'foo/bar/api/' --method get
+node cli --make route --type view --name '/foo/bar/' --method get # or to create an api route
+node cli --make route --type api --name '/foo/bar/api/' --method get
 ```
 
 Now the file `src/routes/views.js` and file `src/routes/api.js` was updated. The
 file `src/routes/views.js`, was appended this:
 
 ```javascript
-ViewRouter.get('foo/bar/', () => controller.call("BarController"));
+ViewRouter.get('/foo/bar/', (req) => controller.call(req, "FooController", "bar"));
 ```
 
 And the `api.js` was appended this:
 
 ```javascript
-ApiRouter.get('foo/bar/api/', () => controller.call("ApiController"));
+ApiRouter.get('/foo/bar/api/', () => controller.call(req, "FooController", "api"));
 ```
 
 ### Making a controller
@@ -470,17 +462,37 @@ class HomeController extends Controller {
   }
   
   /**
-   * Boot the HomeController controller.
+   * The main method for the Home controller.
    *
    * @param {http.server.req} req
    * @return {void}
    */
-  boot(req) {
+  main(req) {
     //
   }
 }
 
 module.exports = HomeController
+```
+
+If you want to specify the method name on your controller, use the flag `--method`:
+
+```sh
+node cli --make controller --name 'HomeController' --method mymethod
+```
+
+And the method mymethod was generated as this:
+
+```javascript
+/**
+ * The mymethod for the HomeController.
+ * 
+ * @param {http.server.req} req
+ * @return {void}
+ */
+mymethod(req) {
+  //
+}
 ```
 
 If the file `HomeController.js` already exists, you get an error from the cli command, the error is this:

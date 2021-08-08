@@ -37,12 +37,12 @@ class Api extends Controller {
   }
   
   /**
-   * Boot the controller
+   * The main method for the Api Controller
    *
    * @param {http.server.req} req
    * @return {void}
    */
-  boot(req) {
+  main(req) {
     this.jsonRes([
       { name: "Joe" },
       { name: "Gabriel" },

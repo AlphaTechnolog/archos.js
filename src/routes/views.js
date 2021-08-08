@@ -7,7 +7,7 @@ const controller = require('../../archos/lib/controller');
  * The addresses doesn't contain a prefix, it is raw path
  *
  * @example If your route is '/' the route path is: '/'
- * @example If your route is /hello/world/ the route path is: '/hello/world/'
+ * @example If your route is '/hello/world/' the route path is: '/hello/world/'
  */
 
-ViewRouter.get('/', (req) => controller.call(req, "Home", "boot"));
+ViewRouter.get('/', (req) => controller.call(req, "Home"));

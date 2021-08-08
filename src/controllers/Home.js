@@ -37,12 +37,12 @@ class Home extends Controller {
   }
   
   /**
-   * Boot the controller
+   * The main method for the Home controller.
    *
    * @param {http.server.req} req
    * @return {void}
    */
-  boot(req) {
+  main(req) {
     this.rawRes('<h1>Hello, World!</h1>');
   }
 }
