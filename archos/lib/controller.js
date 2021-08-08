@@ -10,9 +10,9 @@ class Controller {
    *
    * @param {string} name
    * @param {string} methodName
-   * @return {Archos/Saved/Web/Controller}
+   * @return {Promise<Archos/Saved/Web/Controller>}
    */
-  call(req, name, methodName = "main") {
+  async call(req, name, methodName = "main") {
     if (!name) {
       throw 'Invalid controller call';
     }
@@ -24,7 +24,7 @@ class Controller {
 
     const Controller = require(controllerPath);
     const controller = new Controller(req);
-    controller[methodName](controller.req);
+    await controller[methodName](controller.req);
 
     return controller;
   }

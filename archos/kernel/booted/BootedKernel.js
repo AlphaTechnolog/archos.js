@@ -34,11 +34,11 @@ class BootedKernel {
   /**
    * Main class method
    *
-   * @return {void}
+   * @return {Promise<void>}
    */
-  make() {
+  async make() {
     enviroment.load(consts);
-    this._createServer();
+    await this._createServer();
   }
 
   /**
@@ -112,7 +112,7 @@ class BootedKernel {
    * @return {void}
    */
   _serverCreater__register__route(register, req, res, prefix, name) {
-    Object.entries(register).forEach(([ route, meta ]) => {
+    Object.entries(register).forEach(async ([ route, meta ]) => {
       const furl = urls.fixLastBar(req.url);
       const froute = urls.fixLastBar(route);
 
@@ -124,7 +124,7 @@ class BootedKernel {
           `[${name}]: Requested address: ${prefix + route}, method: ${req.method.toUpperCase()}`
         );
 
-        const controller = meta.cb(req);
+        const controller = await meta.cb(req);
 
         for (const [name, value] of Object.entries(controller._response.headers)) {
           res.setHeader(name, value);
@@ -150,9 +150,9 @@ class BootedKernel {
   /**
    * Create the server
    *
-   * @return {void}
+   * @return {Promise<void>}
    */
-  _createServer() {
+  async _createServer() {
     this._loadServerRoutes();
 
     this._server = http.createServer(async (req, res) => {
@@ -165,18 +165,18 @@ class BootedKernel {
         newApiRouteRegister,
         url
       )) {
-        return webErrors.webError404.dispatch404Error(res, req);
+        return await webErrors.webError404.dispatch404Error(res, req);
       }
 
       if (newViewRouteRegister[url]) {
         if (newViewRouteRegister[url].method !== req.method.toLowerCase()) {
-          return webErrors.webError404.dispatch404Error(res, req);
+          return await webErrors.webError404.dispatch404Error(res, req);
         }
       }
 
       if (newApiRouteRegister[url]) {
         if (newApiRouteRegister[url].method !== req.method.toLowerCase()) {
-          return webErrors.webError404.dispatch404Error(res, req);
+          return await webErrors.webError404.dispatch404Error(res, req);
         }
       }
 
@@ -187,12 +187,12 @@ class BootedKernel {
   /**
    * Start a server
    *
-   * @return {void}
+   * @return {Promise<void>}
    */
-  start() {
+  async start() {
     log.process('Booting the server')
 
-    this._server.listen(consts.get('port'), () => {
+    await this._server.listen(consts.get('port'), () => {
       log.success(`Server booted at port ${consts.get('port')}`);
     });
   }

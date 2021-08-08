@@ -25,9 +25,9 @@ class WebError404 {
    *
    * @param {http.server.res} res
    * @param {http.server.req} req
-   * @return {void}
+   * @return {Promise<void>}
    */
-  dispatch404Error(res, req) {
+  async dispatch404Error(res, req) {
     log.unSeveralError("The requested page doesn't exists");
     log.warning('Request info')
     log.warning('------------')
@@ -36,7 +36,7 @@ class WebError404 {
       logMethod: 'warning'
     });
 
-    const controllerResponse = new MWebError404().run(req);
+    const controllerResponse = await (new MWebError404().run(req));
 
     for (const [key, val] of Object.entries(controllerResponse.headers)) {
       res.setHeader(key, val);

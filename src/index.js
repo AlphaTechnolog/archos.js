@@ -18,5 +18,5 @@ const tasks = kernel.bootTasks();
 
 (async () => {
   await tasks.start();
-  entry.start();
+  await entry.start();
 })();

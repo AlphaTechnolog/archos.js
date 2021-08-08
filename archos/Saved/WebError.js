@@ -6,10 +6,10 @@ class WebError {
    * Run the error
    *
    * @param {http.server.req} req
-   * @return {string}
+   * @return {Promise<string>}
    */
-  run(req) {
-    const controller = this.$controller(req);
+  async run(req) {
+    const controller = await this.$controller(req);
     return controller._response;
   }
 }

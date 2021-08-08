@@ -10,4 +10,4 @@ const controller = require('../../archos/lib/controller');
  * @example If your path is '/hello/world/' the path is /api/hello/world/
  */
 
-ApiRouter.get('/', (req) => controller.call(req, "Api"));
+ApiRouter.get('/', async (req) => await controller.call(req, "Api"));

@@ -8,9 +8,9 @@ class WebError404 extends WebError {
   /**
    * The controller function
    *
-   * @var {Function<http.server.req>}
+   * @var {Promise<any>}
    */
-  $controller = (req) => controller.call(req, 'Error404');
+  $controller = async (req) => await controller.call(req, 'Error404');
 }
 
 module.exports = WebError404
