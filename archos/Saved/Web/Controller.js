@@ -5,6 +5,7 @@ const stringsHelpers = require("../../lib/dataTypes__string");
 const LibsImporter = require('../../lib/libsImporter');
 const paths = require('../../lib/paths')
 const log = require('../../lib/log');
+const ViewsRenderer = require('../../lib/Views/Renderer');
 
 /**
  * The controller class utility
@@ -86,17 +87,23 @@ class Controller {
    * Render a file into the response
    * 
    * @param {string} filepath
+   * @param {Object<string, any>} context
+   * @param {Object<string, string>} headers
    * @return {void}
    */
-  render(filepath) {
+  render(filepath, context = {}, headers = {}) {
     if (!fs.existsSync(filepath)) {
       log.error('Invalid file path, no such file or directory');
     }
 
-    const content = fs.readFileSync(filepath).toString();
+    const viewsRenderer = ViewsRenderer.make(
+      filepath,
+      context
+    );
 
-    this.customRes(content, {
-      'Content-Type': mime.contentType(path.extname(filepath))
+    this.customRes(viewsRenderer.renderedContent, {
+      'Content-Type': mime.contentType(path.extname(filepath)),
+      ...headers
     });
   }
 
@@ -104,13 +111,15 @@ class Controller {
    * Render a view from the src/views directory.
    * 
    * @param {string} viewName
+   * @param {Object<string, any>} context
+   * @param {Object<string, string>} headers
    * @return {void}
    */
-  renderView(viewName) {
+  renderView(viewName, context = {}, headers = {}) {
     this.render(path.join(
       paths.viewsDirectory,
       viewName
-    ));
+    ), context, headers);
   }
 
   /**

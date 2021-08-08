@@ -43,7 +43,9 @@ class Home extends Controller {
    * @return {void}
    */
   main(_req) {
-    this.renderView('home.html');
+    this.renderView('home.html', {
+      title: 'Home'
+    });
   }
 }
 

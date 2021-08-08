@@ -15,7 +15,7 @@ const archosLibraries = [
  * @var {Array<string>}
  */
 const external = [
-  'path'
+  //
 ];
 
 /**
@@ -43,7 +43,9 @@ class Error404 extends Controller {
    * @return {void}
    */
   main(_req) {
-    this.renderView(this.libs.path.join('errors', '404.html'));
+    this.renderView('errors/404.html', {
+      title: 'Error 404'
+    });
   }
 }
 
