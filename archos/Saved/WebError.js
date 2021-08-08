@@ -9,9 +9,7 @@ class WebError {
    * @return {string}
    */
   run(req) {
-    const Controller = this.$controller(req);
-    const controller = new Controller(req);
-    controller.boot(req);
+    const controller = this.$controller(req);
     return controller._response;
   }
 }

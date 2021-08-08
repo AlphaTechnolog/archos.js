@@ -36,7 +36,13 @@ class WebError404 {
       logMethod: 'warning'
     });
 
-    res.end(new MWebError404().run(res).end);
+    const controllerResponse = new MWebError404().run(req);
+
+    for (const [key, val] of Object.entries(controllerResponse.headers)) {
+      res.setHeader(key, val);
+    }
+
+    res.end(controllerResponse.end);
   }
 }
 

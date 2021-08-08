@@ -37,12 +37,12 @@ class Error404 extends Controller {
   }
 
   /**
-   * Boot the Error404 controller.
+   * The main method for the Error404 controller.
    *
    * @param {http.server.req} req
    * @return {void}
    */
-  boot(_req) {
+  main(_req) {
     this.customRes('<h1>HTTP 404 | The requested page does not exists</h1>', {
       'Content-Type': 'text/html',
     });
